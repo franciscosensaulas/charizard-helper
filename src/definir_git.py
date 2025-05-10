@@ -5,16 +5,16 @@ import questionary
 import install_git
 
 
-def __is_git_installed():
+def is_git_installed():
     try:
         # Executa o comando git --version para verificar se o Git está instalado
         result = subprocess.run(['git', '--version'], capture_output=True, text=True, check=True)
         # Se o comando for bem-sucedido, o Git está instalado
-        print(f"Git está instalado: {result.stdout.strip()}")
+        # print(f"Git está instalado: {result.stdout.strip()}")
         return True
     except (subprocess.CalledProcessError, FileNotFoundError):
         # Se o comando falhar, o Git não está instalado
-        print("Git não está instalado ou não está disponível no PATH.")
+        # print("Git não está instalado ou não está disponível no PATH.")
         return False
 
 
@@ -60,8 +60,9 @@ def install_git_or_open_chrome():
 
 
 def run():
-    if not __is_git_installed():
-        install_git_or_open_chrome()
+    if not is_git_installed():
+        print("Git não está instalado ou não está disponível no PATH.")
+        return
     print()
     __set_git_global_config("user.name", "Francisco Lucas Janesch Lange Sens")
     print()
